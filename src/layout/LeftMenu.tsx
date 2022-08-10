@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import { MailOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@ant-design/icons';
 
 function LeftMenu(props: { currentPage: string; setLinkActive: Function }) {
   const [current, setCurrent] = useState(props.currentPage);
