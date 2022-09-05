@@ -2,25 +2,21 @@ import { Button, Space } from 'antd';
 import Table, { ColumnsType } from 'antd/lib/table';
 import { Category, Order, Pet, Tag } from '../../../../api/api.type';
 
-type showEdit = (itemEdit: Pet) => void;
-type deletePet = (itemEdit: Pet) => void;
-type showOrder = (itemEdit: Order) => void;
 
-export interface TablePetPros {
+interface TablePetProps {
   dataSource?: Pet[];
-  showEdit: showEdit;
-  deletePet: deletePet;
-  showOrder: showOrder;
+  showEdit: (itemEdit: Pet) => void;
+  deletePet: (itemEdit: Pet) => void;
+  showOrder: (itemEdit: Order) => void;
   loadingTable:boolean
 }
 
-const TablePet: React.FC<TablePetPros> = (props) => {
+const TablePet: React.FC<TablePetProps> = (props) => {
   const { dataSource, deletePet, showEdit, showOrder,loadingTable } = props;
   const showEditHandle = (itemEdit: Pet) => {
     showEdit(itemEdit);
   };
 
-  
   const columns: ColumnsType<Pet> = [
     {
       title: 'ID',
@@ -43,12 +39,6 @@ const TablePet: React.FC<TablePetPros> = (props) => {
       key: 'category',
       width: '120px',
       render: (category: Category) =>  category?.name, // ( value property,record ,index)
-    },
-    {
-      title: 'CategoryJSON',
-      dataIndex: 'category',
-      key: 'category',
-      render: (_:Category) =>  JSON.stringify(_)// (value,record ,index)
     },
     {
       title: 'Tags',

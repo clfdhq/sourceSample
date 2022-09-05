@@ -2,14 +2,14 @@ import { Descriptions, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { getInventory } from '../services/store.services';
 
-interface InventoryModalPros {
+interface InventoryModalProps {
   visible?: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface Content {
   [key: string]: string;
 }
-export const InventoryModal:React.FC<InventoryModalPros> = (props) => {
+export const InventoryModal:React.FC<InventoryModalProps> = (props) => {
   const {visible, setVisible } = props;
   const [content, setContent] = useState<Content>({'inventory': 'not imformation' });
   const handleOk = () => {

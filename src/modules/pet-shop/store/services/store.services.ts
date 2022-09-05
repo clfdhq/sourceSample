@@ -6,7 +6,7 @@ export const checkIsLoadMore = (page: number, startPage: number): boolean => {
 };
 
 export const getOrderDetail = (
-  id: string,  
+  id: number,  
 ) => {
   return axiosInstance.get<Order>(
     `/store/order/${id}` 

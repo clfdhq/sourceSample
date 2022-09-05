@@ -3,19 +3,12 @@ import { useEffect } from 'react';
 import { Pet } from '../../../../api/api.type';
 import { PetCategory, PetTag } from '../../PetPage';
 
-type RefreshDataHandler = (itemEdit: Pet) => void;
-type SaveItem = (itemEdit: Pet) => void;
 interface PetDrawerProps {
   itemEdit?: Pet;
   visibleEdit?: boolean;
-  setVisibleEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  refreshData: RefreshDataHandler;
-  saveItem: SaveItem;
-  // setPetRef:Function;
-  // petRef: {
-  //   PetCategory: Category[],
-  //   PetTag: Tag[],
-  // }
+  refreshData: (itemEdit: Pet) => void;
+  saveItem: (itemEdit: Pet) => void;
+  closePet: () => void;
 }
 interface FormDrawerPet extends Pet {
   categoryId?: number;
@@ -24,7 +17,7 @@ interface FormDrawerPet extends Pet {
 const { Option } = Select;
 
 const PetDrawer: React.FC<PetDrawerProps> = (props) => {
-  const { itemEdit, visibleEdit, setVisibleEdit, saveItem } = props;
+  const { itemEdit, visibleEdit, saveItem,closePet } = props;
   const [form] = Form.useForm<Pet>();
 
   const Category = [...PetCategory, itemEdit?.category || {}].filter(
@@ -42,15 +35,12 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
   useEffect(() => {
     form.resetFields();
     if (itemEdit && visibleEdit) {
-      // console.log('Category', Category);
-      // console.log('Tags', Tags);
-
       form.setFieldsValue(itemEdit);
     }
   }, [itemEdit, form, visibleEdit]);
 
   const onClose = () => {
-    setVisibleEdit(false);
+    closePet()
     form.resetFields();
   };
 
@@ -58,9 +48,7 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
     const category = Category.find((i) => i.id === formData?.categoryId);
     const tags = Tags.filter((t) => formData?.tagsId?.includes(t.id));
     const save = {
-      ...formData,
-      category: category,
-      tags: tags,
+      ...formData,category,tags
     };
     saveItem(save);
     onClose();
@@ -78,7 +66,6 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
       >
         <Form
           layout="vertical"
-          hideRequiredMark
           form={form}
           onFinish={editItemHandle}
           initialValues={initialValues}

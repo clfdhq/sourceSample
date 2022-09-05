@@ -58,7 +58,7 @@ export const PetPage: React.FC = () => {
   };
   const onSearchOrder = async (value: string) => {
     try {
-      const orderItem = await getOrderDetail(value);
+      const orderItem = await getOrderDetail( Number(value));
       if (orderItem) {
         setVisibleOrder(true);
         setEditOrder(orderItem.data);
@@ -72,9 +72,17 @@ export const PetPage: React.FC = () => {
     setVisibleEdit(true);
     setItemPet(item);
   };
+
+  const closePet = () => {
+    setVisibleEdit(false);
+  };
+
   const showOrder = (item?: Order) => {
     setVisibleOrder(true);
     setEditOrder(item);
+  };
+  const closeOrder = () => {
+    setVisibleOrder(false);
   };
   const deleteOnePet = async (item: Pet) => {
     try {
@@ -172,7 +180,7 @@ export const PetPage: React.FC = () => {
         >
           Inventory information
         </Button>
-        <Search placeholder="Search Pet OrderID" onSearch={onSearchOrder} style={{ width: 200 }} />
+        <Search placeholder="Search Pet OrderID" onSearch = {onSearchOrder} style={{ width: 200 }} />
         {/* <Button onClick={() => showOrder()} type="primary" style={{ marginBottom: 16 }}>
         Add new Order
       </Button> */}
@@ -190,14 +198,14 @@ export const PetPage: React.FC = () => {
         refreshData={getItemHandle}
         itemEdit={itemPet}
         visibleEdit={visibleEdit}
-        setVisibleEdit={setVisibleEdit}
         saveItem={saveOnePet}
+        closePet = {closePet}
       />
       <OrderDrawer
         refreshData={getItemHandle}
         itemEdit={editOrder}
         visibleEdit={visibleOrder}
-        setVisibleEdit={setVisibleOrder}
+        closeOrder = {closeOrder}
         saveItem={savePetOrder}
         onDeleteOrder={deletePetOrder}
       />
