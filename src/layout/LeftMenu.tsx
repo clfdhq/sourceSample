@@ -20,6 +20,16 @@ function LeftMenu(props: { currentPage: string; setLinkActive: Function }) {
           Demo data list
         </Link>
       </Menu.Item>
+      <Menu.Item key="duan" onClick={() => handleClick('duan')} icon={<MailOutlined />}>
+        <Link to="duan" className="nav-Link active">
+          Dự án
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="pet" onClick={() => handleClick('pet')} icon={<MailOutlined />}>
+        <Link to="pet" className="nav-Link active">
+          Pet Store
+        </Link>
+      </Menu.Item>
 
     </Menu>
   );

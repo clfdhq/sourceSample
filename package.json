@@ -27,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "gjson": "npx swagger-typescript-api -p https://petstore.swagger.io/v2/swagger.json -o ./src -n /api/api.type.ts --extract-request-params true --extract-request-body true"
   },
   "eslintConfig": {
     "extends": [

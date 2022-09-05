@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://demo.example.com",
+    baseURL: "https://petstore.swagger.io/v2",
     headers: {
         "Content-Type": "application/json",
     },

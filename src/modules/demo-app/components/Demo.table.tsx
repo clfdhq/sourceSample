@@ -1,4 +1,4 @@
-import { Button, Card, Table } from 'antd';
+import { Button, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { DataSample } from '../demo.interfaces';
 
@@ -9,15 +9,12 @@ interface DemoTableProps {
 const DemoTable: React.FC<DemoTableProps> = (props: DemoTableProps) => {
     const { dataSource, showEdit } = props;
 
-
     const showEditHandle = (itemEdit: DataSample) => {
         showEdit(itemEdit);
     };
-
     const deleteDemo = (itemEdit: DataSample) => {
         console.log('deleteDemo', itemEdit);
     };
-
     const columns: ColumnsType<DataSample> = [
         {
             title: 'id',

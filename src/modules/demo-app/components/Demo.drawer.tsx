@@ -24,6 +24,7 @@ const DemoDrawer: React.FC<DemoDrawerProps> = (props: DemoDrawerProps) => {
     const editItemHandle = (formData: DataSample) => {
         if (!itemEdit?.id) throw new Error('item edit not found');
         refreshData({ ...formData, id: itemEdit?.id });
+        // {name :  formData.name , id : itemEdit.id }
         message.success('Lưu thành công');
     };
 
