@@ -1,0 +1,67 @@
+{
+	"React_Component": {
+		"prefix": "React_Component",
+		"body": [
+		  "export const newComponent = () => {",
+		  "    //Code ",
+		  "  return (",
+		  "    // html render",
+		  "  <>",
+		  "  ",
+		  "  </>);",
+		  "};"
+		],
+		"description": "newComponent"
+	  },
+	  "React_useState": {
+		"prefix": "React_useState",
+		"body": [
+		  "const [TruyenBien,ThayGiaTri] = useState<Kieu>('default')",
+		  "//const HamThayGiaTri = (temp:Kieu) => {",
+		  "        //ThayGiaTri(temp)};",
+		  "// onClick  =   ThayGiaTri(value) //  HamThayGiaTri(value)",
+		  "// props: {TruyenBien}"
+		],
+		"description": "React_useState"
+	  },
+	  "React_TruyenBien": {
+		"prefix": "React_TruyenBien",
+		"body": [
+		  "//Cha",
+		  "//<ChildComponent BienTruyen={Value}}/>",
+		  "//Con",
+		  "const ChildComponent = (props: BienTruyenType) => {",
+		  "  const { BienTruyen } = props;",
+		  "  return <>{BienTruyen}</>;",
+		  "};",
+		  ""
+		],
+		"description": "React_TruyenBien"
+	  },
+	  "React_ThayDoiVaRender": {
+		"prefix": "React_KiemTraThayDoiVaRender",
+		"body": [
+		  "useEffect(()=>{",
+		  "//Code",
+		  "},[BienDieuKien])"
+		],
+		"description": "React_ThayDoiVaRender"
+	  },
+	  "React_interface ": {
+		"prefix": "React_interface",
+		"body": [
+		  "export interface Object{",
+		  "    name?: string;",
+		  "}"
+		],
+		"description": "React_interface "
+	  },
+	  "React_SetValueForm": {
+		"prefix": "React_SetValueForm",
+		"body": [
+		  "  const [form] = Form.useForm()",
+		  "  form.setFieldsValue(Values)"
+		],
+		"description": "React_SetValueForm"
+	  }
+}
