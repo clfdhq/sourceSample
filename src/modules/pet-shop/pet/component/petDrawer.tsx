@@ -6,7 +6,7 @@ import { PetCategory, PetTag } from '../../PetPage';
 interface PetDrawerProps {
   itemEdit?: Pet;
   visibleEdit?: boolean;
-  refreshData: (itemEdit: Pet) => void;
+  refreshData: () => void;
   saveItem: (itemEdit: Pet) => void;
   closePet: () => void;
 }
@@ -47,10 +47,10 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
   const editItemHandle = (formData: FormDrawerPet) => {
     const category = Category.find((i) => i.id === formData?.categoryId);
     const tags = Tags.filter((t) => formData?.tagsId?.includes(t.id));
-    const save = {
+    const item = {
       ...formData,category,tags
     };
-    saveItem(save);
+    saveItem(item);
     onClose();
   };
 
@@ -130,7 +130,7 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
               <Button type="primary" htmlType="submit" >
                 Save
               </Button>
-              <Button type="default" onClick={() => onClose()}>
+              <Button type="default" onClick={() => onClose}>
                 Cancel
               </Button>
             </Space>

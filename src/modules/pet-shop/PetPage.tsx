@@ -39,11 +39,11 @@ export const PetPage: React.FC = () => {
 
   //const [idSearch, setIdSearch] = useState<string>('');
 
-  const getItemHandle = async () => {
+  const getItemHandle = async (value?:string) => {
     setLoadingTable(true)
     try {
       //console.log(`selected status : ${status}`);
-      const { data } = await getPetListByStatus(status); //filter((value, index, array) => index === array.findIndex((item) => item.id === value.id))
+      const { data } = await getPetListByStatus(value||status); //filter((value, index, array) => index === array.findIndex((item) => item.id === value.id))
       const dataPet = data.filter(
         (value, index, array) => index === array.findIndex((item) => item.id === value.id)
       );
@@ -53,10 +53,11 @@ export const PetPage: React.FC = () => {
       console.error('List Error:', error);
     }
   };
-  const onChangeStatus = (value: string) => {
-    setStatus(value);
+  const changeStatus = (value: string) => {
+    setStatus(value)
+    getItemHandle(value);
   };
-  const onSearchOrder = async (value: string) => {
+  const searchOrder = async (value: string) => {
     try {
       const orderItem = await getOrderDetail( Number(value));
       if (orderItem) {
@@ -131,34 +132,15 @@ export const PetPage: React.FC = () => {
   // };
 
   useEffect(() => {
-    const reloadPetTable = async () => {
-      setLoadingTable(true)
-      try {
-        //console.log(`selected status : ${status}`);
-        const { data } = await getPetListByStatus(status); //filter((value, index, array) => index === array.findIndex((item) => item.id === value.id))
-        const dataPet = data.filter(
-          (value, index, array) => index === array.findIndex((item) => item.id === value.id)
-        );
-        setPets(dataPet);
-        setLoadingTable(false)
-      } catch (error) {
-        console.error('List Error:', error);
-      }
-    };
-    if (status) {
-       reloadPetTable()
-    }
-    console.log('useEffect call');
-  }, [status]);
+  }, []);
 
   return (
     <>
       <Space>
         <Select
-          onChange={onChangeStatus}
+          onChange={changeStatus}
           placeholder="Select a status"
           style={{ width: '200px' }}
-          defaultValue={'available'}
         >
           {['available', 'pending', 'sold'].map((i) => (
             <Option value={i} key={i}>
@@ -180,7 +162,7 @@ export const PetPage: React.FC = () => {
         >
           Inventory information
         </Button>
-        <Search placeholder="Search Pet OrderID" onSearch = {onSearchOrder} style={{ width: 200 }} />
+        <Search placeholder="Search Pet OrderID" onSearch = {searchOrder} style={{ width: 200 }} />
         {/* <Button onClick={() => showOrder()} type="primary" style={{ marginBottom: 16 }}>
         Add new Order
       </Button> */}
@@ -207,7 +189,7 @@ export const PetPage: React.FC = () => {
         visibleEdit={visibleOrder}
         closeOrder = {closeOrder}
         saveItem={savePetOrder}
-        onDeleteOrder={deletePetOrder}
+        deleteOrder={deletePetOrder}
       />
       <InventoryModal visible={visibleInventory} setVisible={setVisibleInventory} />
   </>

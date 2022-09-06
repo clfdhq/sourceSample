@@ -22,16 +22,16 @@ interface OrderDrawerProps {
   itemEdit?: Order;
   visibleEdit?: boolean;
   closeOrder: () => void;
-  refreshData: (itemEdit: Order) => void;
+  refreshData: () => void;
   saveItem: (item: Order) => void;
-  onDeleteOrder: (item: Order) => void;
+  deleteOrder: (item: Order) => void;
 }
 interface FormOrder extends Order {
   shipDateMoment: moment.Moment;
 }
 const { Option } = Select;
 export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
-  const { itemEdit, visibleEdit, closeOrder, saveItem, onDeleteOrder } = props;
+  const { itemEdit, visibleEdit, closeOrder, saveItem, deleteOrder } = props;
   const [form] = Form.useForm<FormOrder>();
   const [pet, setPet] = useState<Pet>();
 
@@ -49,14 +49,14 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
     closeOrder();
   };
   const editItemHandle = (formData: FormOrder) => {
-    let save: Order = {
+    const item: Order = {
       ...formData,
       id: formData.id,
       petId: itemEdit?.petId,
       shipDate: moment(formData.shipDateMoment).toISOString(),
       complete: true,
     };
-    saveItem(save);
+    saveItem(item);
     onClose();
   };
   const getPetInformation = async (petId: number) => {
@@ -131,7 +131,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
               </Button>
               <Button
                 type="primary"
-                onClick={() => itemEdit && onDeleteOrder(itemEdit)}
+                onClick={() => itemEdit && deleteOrder(itemEdit)}
                 danger
                 hidden={itemEdit?.id ? false : true}
               >
