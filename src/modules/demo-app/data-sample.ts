@@ -19,13 +19,13 @@ export class dropdownDuAn {
     { Id: 4, value: 'Khác' },
   ];
   TinhTrang = [
-    { Id: 1, value: 'Đang soạn thảo' },
-    { Id: 2, value: 'Đang đấu thầu' },
-    { Id: 3, value: 'Trúng thầu' },
-    { Id: 4, value: 'Nhận lại' },
-    { Id: 6, value: 'Không trúng' },
-    { Id: 7, value: 'Chờ' },
-    { Id: 8, value: 'Khác' },
+    { Id: 1, value: 'Đang soạn thảo', color: 'gray'  },
+    { Id: 2, value: 'Đang đấu thầu', color: 'processing' },
+    { Id: 3, value: 'Trúng thầu', color: 'success' },
+    { Id: 4, value: 'Nhận lại', color: 'warning'},
+    { Id: 6, value: 'Không trúng', color: 'error' },
+    { Id: 7, value: 'Chờ', color: 'processing' },
+    { Id: 8, value: 'Khác', color: 'default' },
   ];
 }
 
@@ -38,6 +38,7 @@ export const DATA_DUAN: DuAn[] = [
     ProjectCategoryId: [1],
     Year: 2021,
     ProjectStatus: 'Đang soạn thảo',
+    Location: 'Thảo Điền, Quận 2'
   },
   {
     Id: 2,
@@ -45,7 +46,8 @@ export const DATA_DUAN: DuAn[] = [
     Title: 'DA-324',
     ProjectCategoryId: [2],
     Year: 2021,
-    ProjectStatus: 'Trúng thầu',
+    ProjectStatus: 'Nhận lại',
+    Location: 'Xã Phong Phú, Huyện Bình Chánh, Tp. Hồ Chí Minh'
   },
   {
     Id: 3,
@@ -54,6 +56,7 @@ export const DATA_DUAN: DuAn[] = [
     ProjectCategoryId: [3],
     Year: 2021,
     ProjectStatus: 'Trúng thầu',
+    Location: 'Khu Dân Cư Thủy Sinh, phường Phú Hữu, Quận 9, Hồ Chí Minh'
   },
   {
     Id: 4,
@@ -62,6 +65,16 @@ export const DATA_DUAN: DuAn[] = [
     ProjectCategoryId: [2, 3],
     Year: 2021,
     ProjectStatus: 'Không trúng',
+    Location: 'Nhơn Trạch , Đồng Nai'
+  },
+  {
+    Id: 5,
+    ProjectCode: 'DA-998',
+    Title: 'DA-998',
+    ProjectCategoryId: [2, 3],
+    Year: 2021,
+    ProjectStatus: 'Đang đấu thầu',
+    Location: 'ĐẢO ĐẠI PHƯỚC, XÃ ĐẠI PHƯỚC, HUYỆN NHƠN TRẠCH, TỈNH ĐỒNG NAI'
   },
 ];
 export const DATA_NHANSU = [

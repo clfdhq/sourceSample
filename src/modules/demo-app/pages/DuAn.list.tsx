@@ -1,6 +1,7 @@
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Row} from 'antd';
+import { AppstoreOutlined, PlusCircleOutlined, TableOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Row, Space} from 'antd';
 import { useEffect, useState } from 'react';
+import DuAnCards from '../components/QuanLyDuAn/cardDuAns';
 import DrawerDuAnCreate from '../components/QuanLyDuAn/drawerDuAnCreate';
 import DrawerDuAnEdit from '../components/QuanLyDuAn/drawerDuAnEdit';
 import DuAnTable from '../components/QuanLyDuAn/tableDuAn';
@@ -12,11 +13,15 @@ const DuAnList: React.FC = () => {
   const [visibleEdit, setVisibleEdit] = useState<boolean>(false);
   const [visibleCreate, setVisibleCreate] = useState<boolean>(false);
   const [itemEdit, setItemEdit] = useState<DuAn>();
+  const [listStyle, setListStyle] = useState<string>('List');
 
   const showEdit = (item: DuAn) => {
     setVisibleEdit(true);
     setItemEdit(item);
   };
+
+  const openListStyle = (style:string) => setListStyle(style)
+
   const showCreate = () => {
     setVisibleCreate(true);
   };
@@ -42,15 +47,24 @@ const DuAnList: React.FC = () => {
     <div>
       <Card title="DU AN COMPONENT" style={{ width: '100%' }}
       extra={
-        <Button icon={<PlusCircleOutlined />} onClick={showCreate}>
+        <Space>
+          <Button icon={<AppstoreOutlined />} onClick={()=>openListStyle('List')}>Danh sách</Button>
+          <Button icon={<TableOutlined />} onClick={()=>openListStyle('Table')}>Bảng</Button>
+          <Button type="primary" icon={<PlusCircleOutlined />} onClick={showCreate}>
         Thêm mới
       </Button>
+        </Space>
+     
       }>
         <Row>
-          <Col span={24}>
+          <Col span={24} hidden={listStyle === 'Table' ? false : true}>
             <DuAnTable dataSource={dataDuAn} showEdit={showEdit} deleteItem={deleteItem}/>
           </Col>
+          <Col span={24} hidden={listStyle === 'List' ? false : true }>
+            <DuAnCards dataSource={dataDuAn} loading={false} showEdit={showEdit} deleteItem={deleteItem}/>
+          </Col>
         </Row>
+
       </Card>
       <DrawerDuAnEdit
         refreshData={refreshdataDuAn}

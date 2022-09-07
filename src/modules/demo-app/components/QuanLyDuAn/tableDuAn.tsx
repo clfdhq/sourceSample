@@ -33,25 +33,33 @@ export const DuAnTable: React.FC<DuAnTableProps> = ({dataSource, showEdit,delete
     getDataHandle();
   }, []);
 
-  const onDelete = (Id:number) =>{
-    deleteItem(Id)
-    message.success('Đã xóa!')
-  }
+  // const onDelete = (Id:number) =>{
+  //   deleteItem(Id)
+  //   message.success('Đã xóa!')
+  // }
   const columns: ColumnsType<DuAn> = [
     {
-      title: 'Code',
-      dataIndex: 'ProjectCode',
-      key: 'ProjectCode',
+      title: '#',
+      render : (a,b,i) => i+1,
+      width:'30px'
     },
     {
-      title: 'Tên dự án',
-      dataIndex: 'Title',
-      key: 'Title',
+      title: 'Mã dự án',
+      dataIndex: 'ProjectCode',
+      key: 'ProjectCode',
+      width:'250px',
+      render: (text,record) => <a onClick={() => {goto(`${record.Id}` )}}>{text}</a>
     },
+    // {
+    //   title: 'Tên dự án',
+    //   dataIndex: 'Title',
+    //   key: 'Title',
+    // },
     {
       title: 'Loại dự án',
       key: 'ProjectCategoryId',
       dataIndex: 'ProjectCategoryId',
+      width:'200px',
       render: (_, { ProjectCategoryId }) => (
         <>
           {ProjectCategoryId.map((item) => {
@@ -69,44 +77,60 @@ export const DuAnTable: React.FC<DuAnTableProps> = ({dataSource, showEdit,delete
       ),
     },
     {
+      title: 'Địa điểm',
+      dataIndex: 'Location',
+      key: 'Location',
+      width:'300px'
+    },
+    {
       title: 'Năm thực hiện',
       dataIndex: 'Year',
       key: 'Year',
+      width:'100px'
     },
     {
       title: 'Trạng thái',
       dataIndex: 'ProjectStatus',
       key: 'ProjectStatus',
+      width:'200px',
+      render: (status) => {
+        const tagColor = itemRef.TinhTrang.find((i) => i.value === status)?.color
+        return (
+          <Tag color={tagColor}>
+                  {status.toUpperCase()}
+                </Tag>
+        )
+    }
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-           <Button
-            onClick={() => {goto(`${record.Id}` )}}
-          >
-            {' '}
-            Full Detail
-          </Button>
-          <Button
-            onClick={() => {
-              showEditHandle(record);}}
-          >
-            {' '}
-            Edit
-          </Button>
-          <Button type="primary" danger onClick = {()=>{
-            onDelete(record.Id)
-          }}>Delete</Button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: 'Action',
+    //   key: 'action',
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //        <Button
+    //         onClick={() => {goto(`${record.Id}` )}}
+    //       >
+    //         {' '}
+    //         Full Detail
+    //       </Button>
+    //       <Button
+    //         onClick={() => {
+    //           showEditHandle(record);}}
+    //       >
+    //         {' '}
+    //         Edit
+    //       </Button>
+    //       <Button type="primary" danger onClick = {()=>{
+    //         onDelete(record.Id)
+    //       }}>Delete</Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (
     <>
-      <Table rowKey={'id'} columns={columns} dataSource={dataSource} style={{ width: '100%' }} />
+      <Table  scroll={{ x: '100%', y: '50vh' }} rowKey={'Id'} columns={columns} dataSource={dataSource} style={{ width: '100%' }} />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
-import { useEffect } from 'react';
+import { useEffect } from 'react' 
 import { Pet } from '../../../../api/api.type';
 import { PetCategory, PetTag } from '../../pet/services/pet.services';
 
@@ -12,7 +12,7 @@ interface PetDrawerProps {
 }
 interface FormDrawerPet extends Pet {
   categoryId?: number;
-  tagsId?: number[];
+  tagIds?: number[];
 }
 const { Option } = Select;
 
@@ -30,7 +30,7 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
   const initialValues = {
     ...itemEdit,
     categoryId: itemEdit?.category?.id,
-    tagsId: itemEdit?.tags?.map((tag) => tag.id),
+    tagIds: itemEdit?.tags?.map((tag) => tag.id),
   };
 
   useEffect(() => {
@@ -40,21 +40,21 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
     }
   }, [itemEdit, form, visibleEdit]);
 
-  const onClose = () => {
+  const close = () => {
     closePet();
     form.resetFields();
   };
 
   const editItemHandle = (formData: FormDrawerPet) => {
     const category = Category.find((i) => i.id === formData?.categoryId);
-    const tags = Tags.filter((t) => formData?.tagsId?.includes(t.id));
+    const tags = Tags.filter((t) => formData?.tagIds?.includes(t.id));
     const item = {
       ...formData,
       category,
       tags,
     };
     saveItem(item);
-    onClose();
+    close();
   };
 
   return (
@@ -62,7 +62,7 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
       <Drawer
         title={itemEdit?.id ? `Pet ID: ${itemEdit?.id}` : 'Create new Pet'}
         width={720}
-        onClose={onClose}
+        onClose={close}
         visible={visibleEdit}
         bodyStyle={{ paddingBottom: 80 }}
         getContainer={false} // gỡ lỗi Forget to pass `form` prop?
@@ -99,7 +99,7 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="tagsId" label="Tag:" rules={[{ required: false, message: 'Tag ?' }]}>
+              <Form.Item name="tagIds" label="Tag:" rules={[{ required: false, message: 'Tag ?' }]}>
                 <Select mode="multiple" showArrow placeholder="Tag ?">
                   {Tags.map((t, i) => (
                     <Option value={t.id} key={i}>
@@ -128,7 +128,7 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
               <Button type="primary" htmlType="submit">
                 Save
               </Button>
-              <Button type="default" onClick={onClose}>
+              <Button type="default" onClick={close}>
                 Cancel
               </Button>
             </Space>

@@ -199,7 +199,7 @@ export const PetPage: React.FC = () => {
                 </Option>
               ))}
             </Select>
-            <Button icon={<PlusCircleOutlined />} onClick={() => showPet()}>
+            <Button type="primary" icon={<PlusCircleOutlined />} onClick={() => showPet()}>
               Add a pet
             </Button>
           </Space>
