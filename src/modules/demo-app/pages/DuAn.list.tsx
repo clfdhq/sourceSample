@@ -1,5 +1,5 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Result, Row, Space } from 'antd';
+import { Button, Card, Col, Row} from 'antd';
 import { useEffect, useState } from 'react';
 import DrawerDuAnCreate from '../components/QuanLyDuAn/drawerDuAnCreate';
 import DrawerDuAnEdit from '../components/QuanLyDuAn/drawerDuAnEdit';
@@ -40,15 +40,13 @@ const DuAnList: React.FC = () => {
 
   return (
     <div>
-      <Card title="DU AN COMPONENT" style={{ width: '100%' }}>
+      <Card title="DU AN COMPONENT" style={{ width: '100%' }}
+      extra={
+        <Button icon={<PlusCircleOutlined />} onClick={showCreate}>
+        Thêm mới
+      </Button>
+      }>
         <Row>
-          <Col span={4} push={20}>
-            <Button icon={<PlusCircleOutlined />} onClick={showCreate}>
-              {' '}
-              Thêm mới{' '}
-            </Button>
-            <p></p>
-          </Col>
           <Col span={24}>
             <DuAnTable dataSource={dataDuAn} showEdit={showEdit} deleteItem={deleteItem}/>
           </Col>

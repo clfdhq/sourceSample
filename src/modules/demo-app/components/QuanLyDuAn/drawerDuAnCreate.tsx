@@ -166,7 +166,7 @@ const items = new dropdownDuAn();
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item wrapperCol={{ span: 16, offset: 8 }}>
+          <Form.Item>
             <Space>
             <Button type="primary" htmlType="submit">
               Save

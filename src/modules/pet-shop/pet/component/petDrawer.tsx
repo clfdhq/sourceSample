@@ -1,7 +1,7 @@
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd';
 import { useEffect } from 'react';
 import { Pet } from '../../../../api/api.type';
-import { PetCategory, PetTag } from '../../PetPage';
+import { PetCategory, PetTag } from '../../pet/services/pet.services';
 
 interface PetDrawerProps {
   itemEdit?: Pet;
@@ -16,16 +16,17 @@ interface FormDrawerPet extends Pet {
 }
 const { Option } = Select;
 
-const PetDrawer: React.FC<PetDrawerProps> = (props) => {
-  const { itemEdit, visibleEdit, saveItem,closePet } = props;
+const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, closePet }) => {
   const [form] = Form.useForm<Pet>();
 
   const Category = [...PetCategory, itemEdit?.category || {}].filter(
     (value, index, array) => index === array.findIndex((item) => item.id === value.id)
   );
+
   const Tags = [...PetTag, ...(itemEdit?.tags || [])].filter(
     (value, index, array) => index === array.findIndex((item) => item.id === value.id)
   );
+
   const initialValues = {
     ...itemEdit,
     categoryId: itemEdit?.category?.id,
@@ -40,7 +41,7 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
   }, [itemEdit, form, visibleEdit]);
 
   const onClose = () => {
-    closePet()
+    closePet();
     form.resetFields();
   };
 
@@ -48,7 +49,9 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
     const category = Category.find((i) => i.id === formData?.categoryId);
     const tags = Tags.filter((t) => formData?.tagsId?.includes(t.id));
     const item = {
-      ...formData,category,tags
+      ...formData,
+      category,
+      tags,
     };
     saveItem(item);
     onClose();
@@ -64,14 +67,9 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
         bodyStyle={{ paddingBottom: 80 }}
         getContainer={false} // gỡ lỗi Forget to pass `form` prop?
       >
-        <Form
-          layout="vertical"
-          form={form}
-          onFinish={editItemHandle}
-          initialValues={initialValues}
-        >
+        <Form layout="vertical" form={form} onFinish={editItemHandle} initialValues={initialValues}>
           <Row gutter={16}>
-            <Col span={12} hidden={itemEdit?.id? true : false}>
+            <Col span={12} hidden={itemEdit?.id ? true : false}>
               <Form.Item name="id" label="Pet ID:" rules={[{ required: true, message: 'ID ?' }]}>
                 <Input placeholder="ID ?" />
               </Form.Item>
@@ -127,10 +125,10 @@ const PetDrawer: React.FC<PetDrawerProps> = (props) => {
           </Row>
           <Form.Item>
             <Space>
-              <Button type="primary" htmlType="submit" >
+              <Button type="primary" htmlType="submit">
                 Save
               </Button>
-              <Button type="default" onClick={() => onClose}>
+              <Button type="default" onClick={onClose}>
                 Cancel
               </Button>
             </Space>

@@ -26,12 +26,14 @@ interface OrderDrawerProps {
   saveItem: (item: Order) => void;
   deleteOrder: (item: Order) => void;
 }
+
 interface FormOrder extends Order {
   shipDateMoment: moment.Moment;
 }
+
 const { Option } = Select;
-export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
-  const { itemEdit, visibleEdit, closeOrder, saveItem, deleteOrder } = props;
+export const OrderDrawer: React.FC<OrderDrawerProps> = ( { itemEdit, visibleEdit, closeOrder, saveItem, deleteOrder }) => {
+  
   const [form] = Form.useForm<FormOrder>();
   const [pet, setPet] = useState<Pet>();
 
@@ -41,13 +43,10 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
       getPetInformation(itemEdit?.petId);
     }
     if (itemEdit?.id) {
-      form.setFieldsValue({ ...itemEdit, shipDateMoment: moment(itemEdit?.shipDate) }); //
+      form.setFieldsValue({ ...itemEdit, shipDateMoment: moment(itemEdit?.shipDate)}); //
     }
   }, [itemEdit, form]);
 
-  const onClose = () => {
-    closeOrder();
-  };
   const editItemHandle = (formData: FormOrder) => {
     const item: Order = {
       ...formData,
@@ -57,7 +56,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
       complete: true,
     };
     saveItem(item);
-    onClose();
+    closeOrder();
   };
   const getPetInformation = async (petId: number) => {
     try {
@@ -70,14 +69,14 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
   return (
     <>
       <Drawer
-        // title={itemEdit?.id?  `Order ID: ${itemEdit.id}` : 'Create new order'}
+        title={itemEdit?.id?  `Order ID: ${itemEdit?.id}` : 'Create new order'}
         width={720}
-        onClose={onClose}
+        onClose={closeOrder}
         visible={visibleEdit}
         bodyStyle={{ paddingBottom: 80 }}
         getContainer={false}
       >
-        <Form layout="vertical" hideRequiredMark form={form} onFinish={editItemHandle}>
+        <Form layout="vertical" form={form} onFinish={editItemHandle}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="id" label="Order ID:" rules={[{ required: true, message: 'ID ?' }]}>
@@ -114,7 +113,8 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
           </Row>
           <Row gutter={16}>
           <Divider orientation="left" plain>Pet description</Divider>
-            <Descriptions>
+            <Descriptions >
+              <Descriptions.Item label="Pet ID"> {pet?.id || itemEdit?.id}</Descriptions.Item>
               <Descriptions.Item label="Name"> {pet?.name}</Descriptions.Item>
               <Descriptions.Item label="Category"> {pet?.category?.name}</Descriptions.Item>
               <Descriptions.Item label="Tags">
@@ -137,7 +137,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = (props) => {
               >
                 Delete
               </Button>
-              <Button type="default" onClick={() => onClose()}>
+              <Button type="default" onClick={closeOrder}>
                 Cancel
               </Button>
             </Space>

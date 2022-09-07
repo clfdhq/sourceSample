@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { Form, Input, InputNumber, Select, Space, Drawer, Col, Row, message, Button } from 'antd';
 import { dropdownDuAn } from '../../data-sample';
@@ -168,7 +168,7 @@ const DrawerDuAnEdit = (props: DuAnDrawerProps) => {
               <Form.Item wrapperCol={{ span: 16, offset: 8 }}></Form.Item>
             </Col>
           </Row>
-          <Form.Item wrapperCol={{ span: 16, offset: 8 }}>
+          <Form.Item>
             <Space>
             <Button type="primary" htmlType="submit">
               Save

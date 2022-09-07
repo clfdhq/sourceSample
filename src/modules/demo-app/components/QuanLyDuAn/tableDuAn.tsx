@@ -1,7 +1,7 @@
 import { Button, message, Space, Table, Tag } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { dropdownDuAn } from '../../data-sample';
 import { DuAn } from '../../duan.interfaces';
 //import ChiTietDuAn from './modelDuAn';
@@ -11,8 +11,7 @@ interface DuAnTableProps {
   showEdit: Function;
 }
 
-export const DuAnTable: React.FC<DuAnTableProps> = (props: DuAnTableProps) => {
-  const { dataSource, showEdit,deleteItem } = props;
+export const DuAnTable: React.FC<DuAnTableProps> = ({dataSource, showEdit,deleteItem }) => {
   // const [isOpenComponent, showModel] = useState<boolean>(false);
   // const [duAnDetail, setduAnDetail] = useState<DuAn>();
   // const [duAnlist, setduAnList] = useState<DuAn[]>();
@@ -56,14 +55,15 @@ export const DuAnTable: React.FC<DuAnTableProps> = (props: DuAnTableProps) => {
       render: (_, { ProjectCategoryId }) => (
         <>
           {ProjectCategoryId.map((item) => {
-            let temp = itemRef.ProjectCategory.find((i) => i.Id === item);
-            if (temp === undefined) return <></>;
-            else
-              return (
-                <Tag color={temp.color} key={temp.value}>
+            const temp = itemRef.ProjectCategory.find((i) => i.Id === item);
+            if (temp) 
+            return (
+                <Tag color={temp.color} key={'ProjectCategoryId_'+ temp.Id}>
                   {temp.value.toUpperCase()}
                 </Tag>
               );
+            else return null
+             
           })}
         </>
       ),
@@ -96,7 +96,7 @@ export const DuAnTable: React.FC<DuAnTableProps> = (props: DuAnTableProps) => {
             {' '}
             Edit
           </Button>
-          <Button onClick = {()=>{
+          <Button type="primary" danger onClick = {()=>{
             onDelete(record.Id)
           }}>Delete</Button>
         </Space>
@@ -107,14 +107,6 @@ export const DuAnTable: React.FC<DuAnTableProps> = (props: DuAnTableProps) => {
   return (
     <>
       <Table rowKey={'id'} columns={columns} dataSource={dataSource} style={{ width: '100%' }} />
-
-      {/* <ChiTietDuAn openComponent = {showModel} isOpenComponent = {isOpenComponent} duAnDetail = {duAnDetail}/> */}
-      {/* <DrawerDuAn
-        openComponent={showModel}
-        isOpenComponent={isOpenComponent}
-        duAnDetail={duAnDetail}
-        getData = {getDataHandle}
-      /> */}
     </>
   );
 };
