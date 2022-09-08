@@ -38,7 +38,9 @@ export const DATA_DUAN: DuAn[] = [
     ProjectCategoryId: [1],
     Year: 2021,
     ProjectStatus: 'Đang soạn thảo',
-    Location: 'Thảo Điền, Quận 2'
+    Location: 'Thảo Điền, Quận 2',
+    ChuDauTu: 'ChuDauTu',
+
   },
   {
     Id: 2,
@@ -134,3 +136,42 @@ export const DATA_PHONGBAN = [
     Emplyoeers: ['Hoàng việt','Trung Thành'],
   },
 ];
+
+export const DATA_CHUDAUTU = [
+  {
+    ChuDauTu: "ChuDauTu",
+    NguoiDaiDienChuDauTu: "NguoiDaiDienChuDauTu",
+    NguoiLienHeChuDauTu: "NguoiLienHeChuDauTu",
+    DiaChiLienHeChuDauTu: "DiaChiLienHeChuDauTu",
+    SoDienThoaiChuDauTu: "01234567899",
+    EmailChuDauTu: "ChuDauTu@mail.com",
+    NhaThauChinh: "NhaThauChinh",
+    NguoiDaiDienNhaThau: "NguoiDaiDienNhaThau",
+    NguoiLienHeNhaThau: "NguoiLienHeNhaThau",
+    DiaChiLienHeNhaThau: "DiaChiLienHeNhaThau",
+    SoDienThoaiNhaThau: "0987654321",
+    EmailNhaThau: "NhaThau@mail.com"
+  }
+]
+export const DATA_DAUTHAU = [
+  {
+    NgayNhanThongTinThau : '2022-11-02',
+    PhucDap: true,
+    NguoiThucHien: "Người thực hiện",
+    NgayThucHien:'2022-11-02',
+    NgayNhanHoSoThau:'2022-11-02',
+    DiaDiemPhatHoSo:"Địa điểm phát hành hồ sơ",
+    BaoDamDuThau: true,
+    LoaiTien:"Đồng tiền",
+    GiaTriSoBo:"Giá trị sơ bộ (VND)",
+    TienDo:"Tiến độ",
+    LuuYDacBiet:"Lưu ý đặc biệt",
+    NgayGioNopThau:'2022-11-02',
+    CachThucNopThau:"Cách thức nộp thầu",
+    NgonNgu:" Ngôn ngữ:",
+    NoiNopThau:"Nơi nộp thầu:",
+    NguoiNhanHoSoThau:"Người nhận HS thầu:",
+    NgayGioMoThau: '2022-11-02',
+    DiaDiemMoThau:"Địa điểm mở thầu:"
+  }
+]

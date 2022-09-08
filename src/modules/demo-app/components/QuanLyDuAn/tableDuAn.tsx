@@ -1,4 +1,4 @@
-import { Button, message, Space, Table, Tag } from 'antd';
+import { Table, Tag } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,9 +23,9 @@ export const DuAnTable: React.FC<DuAnTableProps> = ({dataSource, showEdit,delete
   // const setDuAn = (DuAn: DuAn) => {
   //     setduAnDetail(DuAn)
   // }
-  const showEditHandle = (itemEdit: DuAn) => {
-    showEdit(itemEdit);
-  };
+  // const showEditHandle = (itemEdit: DuAn) => {
+  //   showEdit(itemEdit);
+  // };
   const goto = useNavigate()
 
   const getDataHandle = () => {};

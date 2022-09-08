@@ -47,7 +47,7 @@ const PetDrawer: React.FC<PetDrawerProps> = ({ itemEdit, visibleEdit, saveItem, 
 
   const editItemHandle = (formData: FormDrawerPet) => {
     const category = Category.find((i) => i.id === formData?.categoryId);
-    const tags = Tags.filter((t) => formData?.tagIds?.includes(t.id));
+    const tags = Tags.filter((t) => formData.tagIds?.includes(t.id || 0));
     const item = {
       ...formData,
       category,

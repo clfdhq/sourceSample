@@ -24,7 +24,7 @@ export interface Category {
 
 export interface Pet {
   /** @format int64 */
-  id: number;
+  id?: number;
   category?: Category;
 
   /** @example doggie */
@@ -38,8 +38,8 @@ export interface Pet {
 
 export interface Tag {
   /** @format int64 */
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }
 
 export interface Order {

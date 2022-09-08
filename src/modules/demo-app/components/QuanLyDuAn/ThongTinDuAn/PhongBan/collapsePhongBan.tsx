@@ -4,7 +4,7 @@ import { Card, Col, Collapse, Row } from 'antd';
 import { DATA_PHONGBAN } from '../../../../data-sample';
 
 import { EditOutlined } from '@ant-design/icons';
-import ModelPhongBanDuAn from './modelPhongBan';
+import ModelPhongBanDuAn from './formPhongBan';
 
 // interface DATAIN {
 //   Id: number;
@@ -19,17 +19,22 @@ const PhongBanDuAn = () => {
     setVisiblePhongBan(true);
   };
 
+  const close =() =>{
+    setVisiblePhongBan(false);
+  }
+
   const { Panel } = Collapse;
   const DATA = DATA_PHONGBAN;
   return (
     <>
       <Collapse defaultActiveKey={['1']}>
         <Panel header="Phòng ban tham gia dự án" key="3" 
-        extra={ <EditOutlined onClick={showEdit}/>}>
-          <Row>
-            {DATA.map((element,index) => (
-              <Col span={6} key={element.Title+index}>
-                <Card size="small" title={element.Title} style={{ width: 300 }}>
+        
+        extra={ <EditOutlined onClick={event =>{event.stopPropagation(); showEdit()}}/>}>
+          <Row gutter={16}>
+            {DATA.map((element) => (
+              <Col span={7} key={element.Title+element.Id} style={{marginTop: '10px', minWidth: '300px' }}>
+                <Card title={element.Title} >
                   <p>Trưởng phòng: {element.Manager}</p>
                   <p>Nhân Viên: {element.Emplyoeers.toString()}</p>
                 </Card>
@@ -42,7 +47,7 @@ const PhongBanDuAn = () => {
       <ModelPhongBanDuAn
         //item={ItemDetail}
         visiblePhongBan={visiblePhongBan}
-        setVisiblePhongBan={setVisiblePhongBan}
+        close={close}
       ></ModelPhongBanDuAn>
     </>
   );

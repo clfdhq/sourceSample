@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { Button, Card, Col, Collapse, Descriptions, Row } from 'antd';
+import { Collapse, Descriptions} from 'antd';
 import { DATA_NHANSU, dropdownDuAn } from '../../../../data-sample';
 import { DuAn } from '../../../../duan.interfaces';
-import { getDuAnDetail } from '../../../../services/demo.services';
-import ModelThongTinNhanSu from './modelThongTinNhanSu';
 import { EditOutlined } from '@ant-design/icons';
+import DrawerThongTinNhanSu from './formThongTinNhanSu';
+
 
 const ThongTinNhanSu = () => {
   const [visibleEdit, setVisibleEdit] = useState<boolean>(false);
-  //const [itemEdit, setItemEdit] = useState<DuAn>();
+  const [itemEdit, setItemEdit] = useState<DuAn>();
   const [ItemDetail, setItemDetail] = useState<any>();
 
   const params = useParams();
@@ -20,6 +20,10 @@ const ThongTinNhanSu = () => {
 
   const showEdit = () => {
     setVisibleEdit(true);
+    setItemDetail(ItemDetail);
+  };
+  const close = () => {
+    setVisibleEdit(false);
     //setItemEdit(item);
   };
 
@@ -42,10 +46,7 @@ const ThongTinNhanSu = () => {
 
   const genExtra = () => (
     <EditOutlined
-      onClick={() => {
-        showEdit();
-        // If you don't want click extra trigger collapse, you can prevent this:
-      }}
+      onClick={event =>{event.stopPropagation(); showEdit()}}
     />
   );
 
@@ -70,11 +71,11 @@ const ThongTinNhanSu = () => {
         </Panel>
       </Collapse>
 
-      <ModelThongTinNhanSu
+      <DrawerThongTinNhanSu
         item={ItemDetail}
-        visibleThongTinCoBan={visibleEdit}
-        setVisibleThongTinCoBan={setVisibleEdit}
-      ></ModelThongTinNhanSu>
+        visibleNhanSu={visibleEdit}
+        close={close}
+      />
     </>
   );
 };

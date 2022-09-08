@@ -14,42 +14,30 @@ import {
 import { DuAn } from '../../../../duan.interfaces';
 import { dropdownDuAn } from '../../../../data-sample';
 
-
-type RefreshDataHandler = (itemEdit: DuAn) => void;
-
-interface DuAnProps {
+interface PhongBanDuAnProps {
     item?: DuAn;
     visiblePhongBan: boolean;
-    setVisiblePhongBan: React.Dispatch<React.SetStateAction<boolean>>;
-    refreshData?: RefreshDataHandler;
+    close: () => void;
+    refreshData?: () => void;
 }
-const ModelPhongBanDuAn = (props: DuAnProps) => {
+const PhongBanDuAn:React.FC<PhongBanDuAnProps> = ({item, visiblePhongBan, close}) => {
 
   // const [unEdit, setUnEdit] = useState<boolean>(true);
   // const [typeProjectList, setTypeProjectList] = useState<TypeOptProject>();
   //const {isOpenComponent, openComponent,duAnDetail,getData } = props;
-  const items = new dropdownDuAn();
-  const typeProjectData = items.ProjectCategory.map((e)=>({value: e.Id, label: e.value}));
-  const {item, visiblePhongBan, setVisiblePhongBan} = props;
   const [form] = Form.useForm();
 
-  const handleOk = () => {
-    setVisiblePhongBan(false);
-  };
 
-  const handleCancel = () => {
-    setVisiblePhongBan(false);
-  };
     useEffect(() => {
       form.setFieldsValue(item);
   }, [item]);
 
   return (
     <>
-        <Modal title="Phòng ban dự án" visible={visiblePhongBan} onOk={handleOk} onCancel={handleCancel}>
+        <Drawer title="Phòng ban dự án" visible={visiblePhongBan} onClose={close}>
         View Phong Ban Edit
-      </Modal>
+      </Drawer>
     </>
   );
 };
-export default ModelPhongBanDuAn;
+export default PhongBanDuAn;

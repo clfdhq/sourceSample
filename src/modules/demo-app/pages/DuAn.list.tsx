@@ -29,7 +29,7 @@ const DuAnList: React.FC = () => {
     setdataDuAn(dataDuAn?.filter(da => da.Id !== Id ))
   }
   const refreshdataDuAn = (itemEdit: DuAn) => {
-    let newdataDuAn : any
+    let newdataDuAn: any
     if(itemEdit?.Id)
     {
       newdataDuAn = dataDuAn?.map((data: DuAn) => (data.Id === itemEdit.Id ? itemEdit : data));

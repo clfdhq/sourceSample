@@ -1,6 +1,4 @@
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Collapse, Divider, message, Row, Space, Table, Tag } from 'antd';
-import Meta from 'antd/lib/card/Meta';
+import { Button, Card, Col, Collapse, Divider, Row, Tag } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dropdownDuAn } from '../../data-sample';
@@ -34,9 +32,9 @@ export const DuAnCards: React.FC<DuAnCardProps> = ({
   // const setDuAn = (DuAn: DuAn) => {
   //     setduAnDetail(DuAn)
   // }
-  const showEditHandle = (itemEdit: DuAn) => {
-    showEdit(itemEdit);
-  };
+  // const showEditHandle = (itemEdit: DuAn) => {
+  //   showEdit(itemEdit);
+  // };
 
   const goto = useNavigate();
 
@@ -49,10 +47,10 @@ export const DuAnCards: React.FC<DuAnCardProps> = ({
     return itemRef.TinhTrang.find((i) => i.value === status)?.color;
   };
 
-  const onDelete = (Id: number) => {
-    deleteItem(Id);
-    message.success('Đã xóa!');
-  };
+  // const onDelete = (Id: number) => {
+  //   deleteItem(Id);
+  //   message.success('Đã xóa!');
+  // };
 
   return (
     <Row gutter={16}>

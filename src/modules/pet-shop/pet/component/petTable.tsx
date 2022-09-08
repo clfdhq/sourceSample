@@ -27,7 +27,7 @@ const TablePet: React.FC<TablePetProps> = ({
       dataIndex: 'id',
       key: 'id',
       //render: (number) => number ,
-      sorter: (a, b) => a.id - b.id,
+      //sorter: (a, b) => a.id - b.id 
       width: '220px',
     },
     {

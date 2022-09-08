@@ -5,7 +5,7 @@ import { Button, Card, Descriptions } from 'antd';
 import { dropdownDuAn } from '../../../../data-sample';
 import { DuAn } from '../../../../duan.interfaces';
 import { getDuAnDetail } from '../../../../services/demo.services';
-import ModelThongTinCoBan from './modelThongTinCoBan';
+import ModelThongTinCoBan from './formThongTinCoBan';
 import { EditOutlined } from '@ant-design/icons';
 
 const ThongTinCoBan = () => {
@@ -21,6 +21,9 @@ const ThongTinCoBan = () => {
     setVisibleEdit(true);
     //setItemEdit(item);
   };
+  const close= () => {
+    setVisibleEdit(false)
+  }
   const getProjectCategory_Text = items.ProjectCategory.filter((i) =>
     DuAnDetail?.ProjectCategoryId.includes(i.Id)
   ).map((i) => i.value);
@@ -70,7 +73,7 @@ const ThongTinCoBan = () => {
       <ModelThongTinCoBan
         item={DuAnDetail}
         visibleThongTinCoBan={visibleEdit}
-        setVisibleThongTinCoBan={setVisibleEdit}
+        close={close}
       ></ModelThongTinCoBan>
     </>
   );
